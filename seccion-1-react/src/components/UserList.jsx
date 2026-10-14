@@ -1,14 +1,14 @@
 // UserList.js
 import React from 'react';
 
-const UserList = ({ users }) => {
+const UserList = ({ users = [] }) => {
     // Ordenar los usuarios alfabéticamente por nombre
-    const sortedUsers = users.sort((a, b) => a.name.localeCompare(b.name));
+    const sortedUsers = users.toSorted((a, b) => a.name.localeCompare(b.name));
 
     return (
         <ol>
-            {sortedUsers.map((user, index) => (
-                <li key={index}>{user.name}</li>
+            {sortedUsers.map((user) => (
+                <li key={user.id}>ID: {user.id} - Nombre: {user.name} - Edad: {user.age}</li>
             ))}
         </ol>
     );

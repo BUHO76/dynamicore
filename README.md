@@ -84,9 +84,17 @@ npm run ios                    # o: npx react-native run-ios
 
 **Android** (con un emulador abierto o un dispositivo conectado):
 
+El mapa en Android necesita una API key de Google Maps (Google Cloud Console → *Maps SDK for Android*). Agrégala en `android/local.properties` (archivo ignorado por git, nunca se sube al repositorio):
+
+```properties
+MAPS_API_KEY=tu_api_key
+```
+
 ```bash
 npm run android                # o: npx react-native run-android
 ```
+
+Usa un emulador con imagen *Google Play* (Google Maps lo requiere).
 
 Metro (el bundler) se inicia solo; si no, ejecútalo en otra terminal con `npm start`.
 
@@ -158,9 +166,17 @@ npm run ios
 
 **Android** (with an emulator running or a device connected):
 
+The Android map needs a Google Maps API key (Google Cloud Console → *Maps SDK for Android*). Add it to `android/local.properties` (git-ignored, never committed):
+
+```properties
+MAPS_API_KEY=your_api_key
+```
+
 ```bash
 npm run android
 ```
+
+Use an emulator with a *Google Play* system image (required by Google Maps).
 
 Metro starts automatically; otherwise run `npm start` in a separate terminal. Tests and lint: `npm test`, `npm run lint`.
 

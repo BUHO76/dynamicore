@@ -5,12 +5,18 @@ const UserForm = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [submittedData, setSubmittedData] = useState(null);
+    const [error, setError] = useState('')
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (name && email) {
-            setSubmittedData({ name, email });
+        if (name.trim() === '' || email.trim() === '') {
+            setError('Por favor llena todos los campos');
+            return
         }
+        setError('')
+        setSubmittedData({name, email})
+        setName('')
+        setEmail('')
     };
 
     return (
@@ -26,6 +32,7 @@ const UserForm = () => {
                     <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                 </label>
                 <br />
+                {error && <p style={{color: 'red'}}>{error}</p>}
                 <button type="submit">Enviar</button>
             </form>
             {submittedData && (

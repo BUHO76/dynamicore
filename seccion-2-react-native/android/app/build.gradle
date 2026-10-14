@@ -72,6 +72,20 @@ def enableProguardInReleaseBuilds = false
  */
 def jscFlavor = 'io.github.react-native-community:jsc-android:2026004.+'
 
+/**
+ * Google Maps API key, read from android/local.properties (git-ignored) so it is never committed.
+ * Add a line `MAPS_API_KEY=your_key` to that file.
+ */
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withInputStream { localProperties.load(it) }
+}
+def mapsApiKey = localProperties.getProperty('MAPS_API_KEY', '')
+if (mapsApiKey.isEmpty()) {
+    logger.warn('MAPS_API_KEY is not set in android/local.properties; the map will not load on Android.')
+}
+
 android {
     ndkVersion rootProject.ext.ndkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
@@ -84,6 +98,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        manifestPlaceholders["MAPS_API_KEY"] = mapsApiKey
     }
     signingConfigs {
         debug {

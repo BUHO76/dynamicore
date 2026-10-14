@@ -5,6 +5,7 @@ import ReactAppDependencyProvider
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+  // Set by SceneDelegate; kept for libraries that still look up the app delegate's window.
   var window: UIWindow?
 
   var reactNativeDelegate: ReactNativeDelegate?
@@ -21,14 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     reactNativeDelegate = delegate
     reactNativeFactory = factory
 
-    window = UIWindow(frame: UIScreen.main.bounds)
-
-    factory.startReactNative(
-      withModuleName: "DynamicoreRN",
-      in: window,
-      launchOptions: launchOptions
-    )
-
+    // The window is created in SceneDelegate: the iOS 27 SDK requires the UIScene life cycle.
     return true
   }
 }
